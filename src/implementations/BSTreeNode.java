@@ -2,17 +2,17 @@ package implementations;
 
 public class BSTreeNode<E extends Comparable<? super E>> {
 	
-		private E data;
+		private E element;
 		private BSTreeNode<E> left;
 		private BSTreeNode<E> right;
 		
 		public BSTreeNode(E data) {
-			this.data = data;
+			this.element = data;
 			this.left = null;
 			this.right = null;
 		}
-		public E getData() {
-			return data;
+		public E getElement() {
+			return element;
 		}
 		
 		public BSTreeNode<E> getLeft() {

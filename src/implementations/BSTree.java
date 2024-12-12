@@ -68,10 +68,10 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 	}
 	
 	private BSTreeNode<E> search(BSTreeNode<E> node, E entry) {
-		if (node == null || node.getData().compareTo(entry) == 0) {
+		if (node == null || node.getElement().compareTo(entry) == 0) {
 			return node;
 		}
-		if (entry.compareTo(node.getData()) < 0) {
+		if (entry.compareTo(node.getElement()) < 0) {
 			return search(node.getLeft(), entry);
 		}
 		return search(node.getRight(), entry);
@@ -91,7 +91,7 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 	}
 	
 	private boolean add(BSTreeNode<E> node, E newEntry) {
-		int comparison = newEntry.compareTo(node.getData());
+		int comparison = newEntry.compareTo(node.getElement());
         if (comparison == 0) {
             return false;
         } else if (comparison < 0) {
@@ -165,7 +165,7 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 	private void inorderTraversal(BSTreeNode<E> node, ArrayList<E> elements) {
 		if (node != null) {
             inorderTraversal(node.getLeft(), elements);
-            elements.add(node.getData());
+            elements.add(node.getElement());
             inorderTraversal(node.getRight(), elements);
         }
 	}
@@ -179,7 +179,7 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 	
 	private void preorderTraversal(BSTreeNode<E> node, ArrayList<E> elements) {
         if (node != null) {
-            elements.add(node.getData());
+            elements.add(node.getElement());
             preorderTraversal(node.getLeft(), elements);
             preorderTraversal(node.getRight(), elements);
         }
@@ -196,7 +196,7 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
         if (node != null) {
             postorderTraversal(node.getLeft(), elements);
             postorderTraversal(node.getRight(), elements);
-            elements.add(node.getData());
+            elements.add(node.getElement());
         }
     }
 	
