@@ -30,9 +30,10 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 	
 	private int getHeight(BSTreeNode<E> node) {
 		if (node == null) {
-			return -1;
+			return 0;
 		}
-		return 1 + Math.max(getHeight(node.getLeft()), getHeight(node.getRight()));
+	    return 1 + Math.max(getHeight(node.getLeft()), getHeight(node.getRight()));
+
 	}
 
 	@Override
@@ -154,6 +155,7 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
         }
         return removeMax(node.getRight(), node);
     }
+	
 
 	@Override
 	public Iterator<E> inorderIterator() {
