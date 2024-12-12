@@ -15,10 +15,6 @@ public class BSTreeNode<E extends Comparable<? super E>> {
 			return element;
 		}
 		
-		public E getElement() {
-			return getData();
-		}
-		
 		public BSTreeNode<E> getLeft() {
 			return left;
 		}
