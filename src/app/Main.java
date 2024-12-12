@@ -1,30 +1,49 @@
 package app;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import implementations.BSTree;
+import utilities.Iterator;
+
+import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) {
-        WordEntity word = new WordEntity("Hello", "example.txt", "4");
-        word.insertOccurrence("example.txt", "17");
-        word.insertOccurrence("example2.txt", "9");
+        if(args.length < 2) {
+            System.out.println("Invalid number of arguments. Please provide a file name and a print type.");
+            System.exit(0);
+        }
 
-        HashMap<String, HashSet<String>> map = word.getFileLineMap();
+        BSTree<WordEntity> wordTree = new BSTree<>();
+        TreeBuilder builder = new TreeBuilder("res/" + args[0].replaceAll("[<>]", ""), wordTree);
+        try {
+            builder.build();
+        } catch (FileNotFoundException e) {
+            System.out.println("File" + args[0] +  "not found");
+        }
 
-        map.forEach((key, value) -> {
-            Object[] setArray = value.toArray();
-            StringBuilder lineString = new StringBuilder();
+        Iterator iterator = wordTree.inorderIterator();
 
-            for(int i = 0; i < setArray.length; i++){
-                if(i == setArray.length - 1){
-                    lineString.append(setArray[i]);
-                } else {
-                    lineString.append(setArray[i]).append(", ");
+        switch (args[1]) {
+            case "-pf":
+                while (iterator.hasNext()) {
+                    WordEntity entity = (WordEntity) iterator.next();
+                    TreeStringPrinter.printPfMode(entity);
                 }
-            }
-
-            System.out.println(key + ": " + lineString.toString());
-        });
-        System.out.println("Word occurences: " + word.getOccurrences());
+                break;
+            case "-pl":
+                while (iterator.hasNext()) {
+                    WordEntity entity = (WordEntity) iterator.next();
+                    TreeStringPrinter.printPlMode(entity);
+                }
+                break;
+            case "-po":
+                while (iterator.hasNext()) {
+                    WordEntity entity = (WordEntity) iterator.next();
+                    TreeStringPrinter.printPoMode(entity);
+                }
+                break;
+            default:
+                System.out.println("Unknown print type " + args[1] + '.' + "Please choose one of: -pf, -pl, -po.");
+                System.exit(0);
+        }
     }
 }

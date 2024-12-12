@@ -5,13 +5,13 @@ import java.util.HashSet;
 
 public class WordEntity implements Comparable<WordEntity>{
     private String word;
-    private HashMap<String, HashSet<String>> fileLineMap = new HashMap<>();
+    private HashMap<String, HashSet<Integer>> fileLineMap = new HashMap<>();
     private int occurrences = 0;
 
-    public WordEntity(String word, String file, String line) {
+    public WordEntity(String word, String file, int line) {
         this.word = word;
 
-        HashSet<String> lineList = new HashSet<>();
+        HashSet<Integer> lineList = new HashSet<>();
         lineList.add(line);
 
         fileLineMap.put(file, lineList);
@@ -19,9 +19,9 @@ public class WordEntity implements Comparable<WordEntity>{
         occurrences++;
     }
 
-    public void insertOccurrence(String file, String line) {
+    public void insertOccurrence(String file, Integer line) {
         if (!fileLineMap.containsKey(file)) {
-            HashSet<String> lineList = new HashSet<>();
+            HashSet<Integer> lineList = new HashSet<>();
             lineList.add(line);
             fileLineMap.put(file, lineList);
         } else {
@@ -35,7 +35,7 @@ public class WordEntity implements Comparable<WordEntity>{
         return word;
     }
 
-    public HashMap<String, HashSet<String>> getFileLineMap() {
+    public HashMap<String, HashSet<Integer>> getFileLineMap() {
         return fileLineMap;
     }
 
@@ -45,6 +45,6 @@ public class WordEntity implements Comparable<WordEntity>{
 
     @Override
     public int compareTo(WordEntity o) {
-        return word.compareTo(o.word);
+        return word.toLowerCase().compareTo(o.word.toLowerCase());
     }
 }
