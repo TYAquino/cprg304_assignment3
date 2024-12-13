@@ -42,7 +42,7 @@ public class TreeBuilder {
         if(foundEntity == null) {
             tree.add(wordEntity);
         } else {
-            foundEntity.getData().insertOccurrence(filepath, line);
+            foundEntity.getElement().insertOccurrence(filepath, line);
         }
     }
 }
