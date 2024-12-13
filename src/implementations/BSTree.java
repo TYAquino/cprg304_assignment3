@@ -2,10 +2,12 @@ package implementations;
  
 import utilities.BSTreeADT;
 import utilities.Iterator;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
  
-public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
+public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E>, Serializable {
  
 	private BSTreeNode<E> root;
 	private int size;
@@ -33,7 +35,6 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E> {
 			return 0;
 		}
 	    return 1 + Math.max(getHeight(node.getLeft()), getHeight(node.getRight()));
- 
 	}
  
 	@Override
