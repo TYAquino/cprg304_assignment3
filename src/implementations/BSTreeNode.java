@@ -6,8 +6,8 @@ public class BSTreeNode<E extends Comparable<? super E>> {
 		private BSTreeNode<E> left;
 		private BSTreeNode<E> right;
 		
-		public BSTreeNode(E data) {
-			this.element = data;
+		public BSTreeNode(E element) {
+			this.element = element;
 			this.left = null;
 			this.right = null;
 		}
