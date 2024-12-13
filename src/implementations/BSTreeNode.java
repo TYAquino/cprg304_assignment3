@@ -1,5 +1,5 @@
 package implementations;
-
+ 
 public class BSTreeNode<E extends Comparable<? super E>> {
 	
 		private E element;
@@ -14,7 +14,7 @@ public class BSTreeNode<E extends Comparable<? super E>> {
 		public E getElement() {
 			return element;
 		}
-		
+
 		public BSTreeNode<E> getLeft() {
 			return left;
 		}
