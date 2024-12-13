@@ -209,7 +209,7 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E>, Se
     }
 	
 	// Serialization and Reconstruction Methods
-	 private void writeObject(ObjectOutputStream out) throws IOException {
+	{/** private void writeObject(ObjectOutputStream out) throws IOException {
 	        out.defaultWriteObject();
 	        out.writeObject(root);
 	        out.writeInt(size);
@@ -232,7 +232,7 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E>, Se
 	        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
 	            out.writeObject(this);
 	        }
-	    }
+	    } */}
 	
 	// TreeIterator Methods
 	private static class TreeIterator<E> implements Iterator<E> {
