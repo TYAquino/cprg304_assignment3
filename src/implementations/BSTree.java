@@ -17,9 +17,9 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E>, Se
     }
 
     @Override
-    public BSTreeNode<E> getRoot() {
+    public BSTreeNode<E> getRoot() throws NullPointerException {
     	if (root == null) {
-            throw new NullPointerException("The tree is empty.");
+            throw new NullPointerException("The tree is empty");
         }
         return root;
     }
@@ -31,7 +31,7 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E>, Se
 
     private int getHeight(BSTreeNode<E> node) {
         if (node == null) {
-            return 0;
+            return -1;
         }
         return 1 + Math.max(getHeight(node.getLeft()), getHeight(node.getRight()));
     }
@@ -53,7 +53,7 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E>, Se
     }
 
     @Override
-    public boolean contains(E entry) {
+    public boolean contains(E entry) throws NullPointerException {
         if (entry == null) {
             throw new NullPointerException("Entry cannot be null");
         }
@@ -61,7 +61,7 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E>, Se
     }
 
     @Override
-    public BSTreeNode<E> search(E entry) {
+    public BSTreeNode<E> search(E entry) throws NullPointerException {
         if (entry == null) {
             throw new NullPointerException("Entry cannot be null");
         }
@@ -69,18 +69,15 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E>, Se
     }
 
     private BSTreeNode<E> search(BSTreeNode<E> node, E entry) {
-    	if (node == null) {
-            return null;
-        }
-        int comparison = entry.compareTo(node.getElement());
-        if (comparison < 0) {
-            return search(node.getLeft(), entry);
-        } else if (comparison > 0) {
-            return search(node.getRight(), entry);
-        } else {
+    	if (node == null || node.getElement().compareTo(entry) == 0) {
             return node;
         }
+        if (entry.compareTo(node.getElement()) < 0) {
+            return search(node.getLeft(), entry);
+        }
+        return search(node.getRight(), entry);
     }
+
 
     @Override
     public boolean add(E newEntry) {
@@ -98,7 +95,7 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E>, Se
     private boolean add(BSTreeNode<E> node, E newEntry) {
     	int comparison = newEntry.compareTo(node.getElement());
         if (comparison == 0) {
-            return false; // Duplicate entries not allowed.
+            return false; // Duplicate entries are not allowed.
         } else if (comparison < 0) {
             if (node.getLeft() == null) {
                 node.setLeft(new BSTreeNode<>(newEntry));
@@ -124,12 +121,9 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E>, Se
             return null;
         }
         BSTreeNode<E>[] result = removeMin(root, null);
-        if (result != null) {
-            root = result[1];
-            size--;
-            return result[0];
-        }
-        return null;
+        root = result[1];
+        size--;
+        return result[0];
     }
 
     private BSTreeNode<E>[] removeMin(BSTreeNode<E> node, BSTreeNode<E> parent) {
@@ -148,12 +142,9 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E>, Se
             return null;
         }
         BSTreeNode<E>[] result = removeMax(root, null);
-        if (result != null) {
-            root = result[1];
-            size--;
-            return result[0];
-        }
-        return null;
+        root = result[1];
+        size--;
+        return result[0];
     }
 
     private BSTreeNode<E>[] removeMax(BSTreeNode<E> node, BSTreeNode<E> parent) {
