@@ -203,6 +203,33 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E>, Se
         }
     }
 	
+	 // Serialization Methods
+
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        out.writeObject(root);
+        out.writeInt(size);
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        root = (BSTreeNode<E>) in.readObject();
+        size = in.readInt();
+    }
+
+    public BSTree<E> loadFromFile(String filename) throws IOException, ClassNotFoundException {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
+            BSTree<E> tree = (BSTree<E>) in.readObject();
+            return tree;
+        }
+    }
+
+    public void saveToFile(String filename) throws IOException {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
+            out.writeObject(this);
+        }
+    }
+	
 	// TreeIterator Methods
 	private static class TreeIterator<E> implements Iterator<E> {
         private final ArrayList<E> elements;
