@@ -1,9 +1,10 @@
 package app;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class WordEntity implements Comparable<WordEntity>{
+public class WordEntity implements Comparable<WordEntity>, Serializable  {
     private String word;
     private HashMap<String, HashSet<Integer>> fileLineMap = new HashMap<>();
     private int occurrences = 0;
