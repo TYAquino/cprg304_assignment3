@@ -3,11 +3,6 @@ package implementations;
 import utilities.BSTreeADT;
 import utilities.Iterator;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -207,32 +202,6 @@ public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E>, Se
             elements.add(node.getElement());
         }
     }
-	
-	// Serialization and Reconstruction Methods
-	 private void writeObject(ObjectOutputStream out) throws IOException {
-	        out.defaultWriteObject();
-	        out.writeObject(root);
-	        out.writeInt(size);
-	    }
-
-	    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-	        in.defaultReadObject();
-	        root = (BSTreeNode<E>) in.readObject();
-	        size = in.readInt();
-	    }
-
-	    public BSTree<E> loadFromFile(String filename) throws IOException, ClassNotFoundException {
-	        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
-	            BSTree<E> tree = (BSTree<E>) in.readObject();
-	            return tree;
-	        }
-	    }
-
-	    public void saveToFile(String filename) throws IOException {
-	        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
-	            out.writeObject(this);
-	        }
-	    }
 	
 	// TreeIterator Methods
 	private static class TreeIterator<E> implements Iterator<E> {
