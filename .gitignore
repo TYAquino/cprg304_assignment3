@@ -1,2 +1,8 @@
 assignment3StartingCode.iml
 .idea
+classes
+repository.ser
+src/META-INF
+bin/META-INF
+/bin
+.settings

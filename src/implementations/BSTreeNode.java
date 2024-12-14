@@ -1,6 +1,8 @@
 package implementations;
- 
-public class BSTreeNode<E extends Comparable<? super E>> {
+
+import java.io.Serializable;
+
+public class BSTreeNode<E extends Comparable<? super E>> implements Serializable {
 	
 		private E element;
 		private BSTreeNode<E> left;

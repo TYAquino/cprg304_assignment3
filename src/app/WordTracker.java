@@ -30,7 +30,7 @@ public class WordTracker {
             wordTree = new BSTree<>();
         }
 
-        TreeBuilder builder = new TreeBuilder("res/" + args[0].replaceAll("[<>]", ""), wordTree);
+        TreeBuilder builder = new TreeBuilder(args[0].replaceAll("[<>]", ""), wordTree);
         try {
             builder.build();
         } catch (FileNotFoundException e) {
